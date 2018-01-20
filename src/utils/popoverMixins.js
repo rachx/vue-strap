@@ -73,44 +73,49 @@ export default {
       }
       setTimeout(() => {
         const popover = this.$els.popover
-        console.log(trigger.offsetTop)
-        console.log(popover.offsetHeight)
         this.calculateOffset(trigger, popover)
         popover.style.top = this.position.top + 'px'
         popover.style.left = this.position.left + 'px'
-        if (this.$els.arrow) {
+
+        setTimeout(() => {
+          // Recomputes in case the popover gets resized when placed in the current position
           let actualWidth  = popover.offsetWidth
           let actualHeight = popover.offsetHeight
-          this.calculateOffset(trigger, popover) // Update for CSS adjustment
+          this.calculateOffset(trigger, popover)
           let delta = this.getViewportAdjustedDelta(this.position, actualWidth, actualHeight)
           if (delta.left) this.position.left += delta.left
           else this.position.top += delta.top
           popover.style.top = this.position.top + 'px'
           popover.style.left = this.position.left + 'px'
-          let isVertical = /top|bottom/.test(this.placement)
-          let arrowDelta = isVertical ? delta.left * 2 : delta.top * 2;
-          let arrowOffsetPosition = isVertical ? popover.offsetWidth : popover.offsetHeight
-          this.adjustArrow(arrowDelta, arrowOffsetPosition, isVertical)
-        }
+
+          if (this.$els.arrow) {
+            let isVertical = /top|bottom/.test(this.placement)
+            let arrowDelta = isVertical ? delta.left * 2 : delta.top * 2;
+            let arrowOffsetPosition = isVertical ? popover.offsetWidth : popover.offsetHeight
+            this.adjustArrow(arrowDelta, arrowOffsetPosition, isVertical)
+          }
+        }, 0)
       }, 0)
     },
     calculateOffset (trigger, popover) {
+      const triggerBoundingRect = trigger.getBoundingClientRect()
+
       switch (this.placement) {
         case 'top' :
-          this.position.left = trigger.offsetLeft - popover.offsetWidth / 2 + trigger.offsetWidth / 2
+          this.position.left = triggerBoundingRect.left - popover.offsetWidth / 2 + triggerBoundingRect.width / 2
           this.position.top = trigger.offsetTop - popover.offsetHeight
           break
         case 'left':
-          this.position.left = trigger.offsetLeft - popover.offsetWidth
-          this.position.top = trigger.offsetTop + trigger.offsetHeight / 2 - popover.offsetHeight / 2
+          this.position.left = triggerBoundingRect.left - popover.offsetWidth
+          this.position.top = trigger.offsetTop + triggerBoundingRect.height / 2 - popover.offsetHeight / 2
           break
         case 'right':
-          this.position.left = trigger.offsetLeft + trigger.offsetWidth
-          this.position.top = trigger.offsetTop + trigger.offsetHeight / 2 - popover.offsetHeight / 2
+          this.position.left = triggerBoundingRect.left + triggerBoundingRect.offsetWidth
+          this.position.top = trigger.offsetTop + triggerBoundingRect.height / 2 - popover.offsetHeight / 2
           break
         case 'bottom':
-          this.position.left = trigger.offsetLeft - popover.offsetWidth / 2 + trigger.offsetWidth / 2
-          this.position.top = trigger.offsetTop + trigger.offsetHeight
+          this.position.left = triggerBoundingRect.left - popover.offsetWidth / 2 + triggerBoundingRect.width / 2
+          this.position.top = trigger.offsetTop + triggerBoundingRect.height
           break
         default:
           console.warn('Wrong placement prop')
@@ -137,7 +142,7 @@ export default {
         var rightEdgeOffset = pos.left + actualWidth
         if (leftEdgeOffset < viewportDimensions.left) { // left overflow
           delta.left = viewportDimensions.left - leftEdgeOffset
-        } else if (rightEdgeOffset > viewportDimensions.right) { // right overflow
+        } else if (rightEdgeOffset > viewportDimensions.left + viewportDimensions.width) { // right overflow
           delta.left = viewportDimensions.left + viewportDimensions.width - rightEdgeOffset
         }
       }
