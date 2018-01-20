@@ -110,7 +110,7 @@ export default {
           this.position.top = trigger.offsetTop + triggerBoundingRect.height / 2 - popover.offsetHeight / 2
           break
         case 'right':
-          this.position.left = triggerBoundingRect.left + triggerBoundingRect.offsetWidth
+          this.position.left = triggerBoundingRect.left + triggerBoundingRect.width
           this.position.top = trigger.offsetTop + triggerBoundingRect.height / 2 - popover.offsetHeight / 2
           break
         case 'bottom':
