@@ -74,19 +74,19 @@ export default {
       setTimeout(() => {
         const popover = this.$els.popover
         this.calculateOffset(trigger, popover)
-        popover.style.top = this.position.top + 'px'
-        popover.style.left = this.position.left + 'px'
+        this.updateOffsetForMargins()
+        this.applyOffset()
 
         setTimeout(() => {
           // Recomputes in case the popover gets resized when placed in the current position
           let actualWidth  = popover.offsetWidth
           let actualHeight = popover.offsetHeight
           this.calculateOffset(trigger, popover)
+          this.updateOffsetForMargins()
           let delta = this.getViewportAdjustedDelta(this.position, actualWidth, actualHeight)
           if (delta.left) this.position.left += delta.left
           else this.position.top += delta.top
-          popover.style.top = this.position.top + 'px'
-          popover.style.left = this.position.left + 'px'
+          this.applyOffset()
 
           if (this.$els.arrow) {
             let isVertical = /top|bottom/.test(this.placement)
@@ -98,28 +98,37 @@ export default {
       }, 0)
     },
     calculateOffset (trigger, popover) {
-      const triggerBoundingRect = trigger.getBoundingClientRect()
+      const triggerDimensions = this.getDimensions(trigger)
 
       switch (this.placement) {
-        case 'top' :
-          this.position.left = triggerBoundingRect.left - popover.offsetWidth / 2 + triggerBoundingRect.width / 2
-          this.position.top = trigger.offsetTop - popover.offsetHeight
+        case 'top':
+          this.position.left = triggerDimensions.left - popover.offsetWidth / 2 + triggerDimensions.width / 2
+          this.position.top = triggerDimensions.top - popover.offsetHeight
           break
         case 'left':
-          this.position.left = triggerBoundingRect.left - popover.offsetWidth
-          this.position.top = trigger.offsetTop + triggerBoundingRect.height / 2 - popover.offsetHeight / 2
+          this.position.left = triggerDimensions.left - popover.offsetWidth
+          this.position.top = triggerDimensions.top + triggerDimensions.height / 2 - popover.offsetHeight / 2
           break
         case 'right':
-          this.position.left = triggerBoundingRect.left + triggerBoundingRect.width
-          this.position.top = trigger.offsetTop + triggerBoundingRect.height / 2 - popover.offsetHeight / 2
+          this.position.left = triggerDimensions.left + triggerDimensions.width
+          this.position.top = triggerDimensions.top + triggerDimensions.height / 2 - popover.offsetHeight / 2
           break
         case 'bottom':
-          this.position.left = triggerBoundingRect.left - popover.offsetWidth / 2 + triggerBoundingRect.width / 2
-          this.position.top = trigger.offsetTop + triggerBoundingRect.height
+          this.position.left = triggerDimensions.left - popover.offsetWidth / 2 + triggerDimensions.width / 2
+          this.position.top = triggerDimensions.top + triggerDimensions.height
           break
         default:
           console.warn('Wrong placement prop')
       }
+    },
+    updateOffsetForMargins () {
+      const margins = this.getPopoverMargins()
+      this.position.top += margins.top
+      this.position.left += margins.left
+    },
+    getDimensions (element) {
+      const $element = jQuery(element)
+      return jQuery.extend({}, element.getBoundingClientRect(), $element.offset())
     },
     getViewportAdjustedDelta (pos, actualWidth, actualHeight) {
       var delta = { top: 0, left: 0 };
@@ -147,6 +156,17 @@ export default {
         }
       }
       return delta
+    },
+    getPopoverMargins () {
+      const $popover = jQuery(this.$els.popover)
+      return {
+        top: parseInt($popover.css('margin-top'), 10) || 0,
+        left: parseInt($popover.css('margin-left'), 10) || 0
+      }
+    },
+    applyOffset () {
+      const popover = this.$els.popover
+      jQuery(popover).offset(this.position)
     },
     adjustArrow (delta, dimension, isVertical) {
       this.$els.arrow.style[isVertical ? 'left' : 'top'] = 50 * (1 - delta / dimension) + '%'
