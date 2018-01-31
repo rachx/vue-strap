@@ -29789,13 +29789,8 @@
 	      }
 	    }
 	  },
-	  computed: {
-	    isPureText: function isPureText() {
-	      return this.$els.trigger.children.length === 0;
-	    }
-	  },
 	  attached: function attached() {
-	    this.isPureText && (this.$els.trigger.style['border-bottom'] = '1px dotted black');
+	    this.$els.trigger.style['text-decoration'] = 'underline dotted';
 	  }
 	};
 	// </script>
@@ -33776,6 +33771,10 @@
 	
 	//       <popover header="false" content="Nice!">What do you say</popover>
 	
+	//       <popover header="false" content="Nice!"><em> Originally italic </em></popover>
+	
+	//       <popover header="false" content="Nice!"><strong> Originally bold </strong></popover>
+	
 	//     </div>
 	
 	//     <doc-code language="markup">
@@ -34000,15 +33999,12 @@
 	    }
 	  },
 	  computed: {
-	    isPureText: function isPureText() {
-	      return this.$els.trigger.children.length === 0;
-	    },
 	    hasSlot: function hasSlot() {
 	      return this._slotContents !== void 0;
 	    }
 	  },
 	  attached: function attached() {
-	    this.isPureText && (this.$els.trigger.style['border-bottom'] = '1px dotted black');
+	    this.$els.trigger.style['text-decoration'] = 'underline dotted';
 	  }
 	};
 	// </script>
@@ -34720,7 +34716,7 @@
 /* 383 */
 /***/ (function(module, exports) {
 
-	module.exports = "<doc-section id=\"popover\" name=\"Popover\">\r\n    <div class=\"bs-example\">\r\n      <popover v-for=\"place in placements\" effect=\"fade\" :content=\"text\" :placement=\"place\">\r\n        <button class=\"btn btn-default\">Popover on {{place}}</button>\r\n      </popover>\r\n      <hr>\r\n      <h4>Title</h4>\r\n      <popover v-for=\"place in placements\" effect=\"fade\" header title=\"Title\" :content=\"text\" :placement=\"place\">\r\n        <button class=\"btn btn-default\">Popover on {{place}}</button>\r\n      </popover>\r\n      <hr>\r\n      <h4>Trigger</h4>\r\n      <p>\r\n        <popover effect=\"scale\" title=\"Title\" :content=\"content\" placement=\"top\" trigger=\"hover\">\r\n          <button class=\"btn btn-default\">Mouseenter</button>\r\n        </popover>\r\n        <popover effect=\"scale\" title=\"Title\" :content=\"text\" placement=\"top\" trigger=\"contextmenu\">\r\n          <button class=\"btn btn-default\">Contextmenu (right click)</button>\r\n        </popover>\r\n      </p>\r\n      <popover effect=\"scale\" title=\"Title\" :content=\"text\" placement=\"bottom\" trigger=\"focus\">\r\n        <bs-input type=\"text\" placeholder=\"Focus\"></bs-input>\r\n      </popover>\r\n      <h4>Markdown</h4>\r\n      <p>\r\n        <popover effect=\"scale\" title=\"**Emoji title** :rocket:\" content=\"++emoji++ content :cat:\">\r\n          <button class=\"btn btn-default\">Hover</button>\r\n        </popover>\r\n      </p>\r\n      <h4>Content using slot</h4>\r\n      <popover effect=\"scale\" title=\"**Emoji title** :rocket:\">\r\n        <div slot=\"content\">\r\n          This is a long content...\r\n        </div>\r\n\r\n        <button class=\"btn btn-default\">Hover</button>\r\n      </popover>\r\n      <h4>Wrap Text</h4>\r\n      <popover header=\"false\" content=\"Nice!\">What do you say</popover>\r\n    </div>\r\n    <doc-code language=\"markup\">\r\n      <popover effect=\"fade\" placement=\"bottom\" title=\"Title\" content=\"content\">\r\n        <button class=\"btn btn-default\">Popover on bottom</button>\r\n      </popover>\r\n\r\n      Markdown\r\n      <popover effect=\"scale\" title=\"**Emoji title** :rocket:\" content=\"++emoji++ content :cat:\">\r\n        <button class=\"btn btn-default\">Hover</button>\r\n      </popover>\r\n\r\n      For larger content, use slot=\"content\"\r\n      <popover effect=\"scale\" title=\"**Emoji title** :rocket:\">\r\n        <div slot=\"content\">\r\n          This is a long content...\r\n        </div>\r\n\r\n        <button class=\"btn btn-default\">Hover</button>\r\n      </popover>\r\n    </doc-code>\r\n    <doc-table>\r\n      <div>\r\n        <p>trigger</p>\r\n        <p><code>String</code>, one of <code>click</code> <code>focus</code> <code>hover</code> <code>contextmenu</code></p>\r\n        <p><code>hover</code></p>\r\n        <p>How the popover is triggered.</p>\r\n      </div>\r\n      <div>\r\n        <p>effect</p>\r\n        <p><code>String</code>, one of <code>scale</code> <code>fade</code></p>\r\n        <p><code>fade</code></p>\r\n        <p></p>\r\n      </div>\r\n      <div>\r\n        <p>title</p>\r\n        <p><code>String</code>, or be markdown inline text</p>\r\n        <p></p>\r\n        <p></p>\r\n      </div>\r\n      <div>\r\n        <p>content</p>\r\n        <p><code>String</code>, or be markdown inline text</p>\r\n        <p></p>\r\n        <p></p>\r\n      </div>\r\n      <div>\r\n        <p>header</p>\r\n        <p><code>Boolean</code></p>\r\n        <p><code>true</code></p>\r\n        <p>Whether to show the header.</p>\r\n      </div>\r\n      <div>\r\n        <p>placement</p>\r\n        <p><code>String</code>, one of <code>top</code>\r\n        <code>left</code>\r\n        <code>right</code>\r\n        <code>bottom</code></p>\r\n        <p>top</p>\r\n        <p>How to position the popover.</p>\r\n      </div>\r\n    </doc-table>\r\n  </doc-section>";
+	module.exports = "<doc-section id=\"popover\" name=\"Popover\">\r\n    <div class=\"bs-example\">\r\n      <popover v-for=\"place in placements\" effect=\"fade\" :content=\"text\" :placement=\"place\">\r\n        <button class=\"btn btn-default\">Popover on {{place}}</button>\r\n      </popover>\r\n      <hr>\r\n      <h4>Title</h4>\r\n      <popover v-for=\"place in placements\" effect=\"fade\" header title=\"Title\" :content=\"text\" :placement=\"place\">\r\n        <button class=\"btn btn-default\">Popover on {{place}}</button>\r\n      </popover>\r\n      <hr>\r\n      <h4>Trigger</h4>\r\n      <p>\r\n        <popover effect=\"scale\" title=\"Title\" :content=\"content\" placement=\"top\" trigger=\"hover\">\r\n          <button class=\"btn btn-default\">Mouseenter</button>\r\n        </popover>\r\n        <popover effect=\"scale\" title=\"Title\" :content=\"text\" placement=\"top\" trigger=\"contextmenu\">\r\n          <button class=\"btn btn-default\">Contextmenu (right click)</button>\r\n        </popover>\r\n      </p>\r\n      <popover effect=\"scale\" title=\"Title\" :content=\"text\" placement=\"bottom\" trigger=\"focus\">\r\n        <bs-input type=\"text\" placeholder=\"Focus\"></bs-input>\r\n      </popover>\r\n      <h4>Markdown</h4>\r\n      <p>\r\n        <popover effect=\"scale\" title=\"**Emoji title** :rocket:\" content=\"++emoji++ content :cat:\">\r\n          <button class=\"btn btn-default\">Hover</button>\r\n        </popover>\r\n      </p>\r\n      <h4>Content using slot</h4>\r\n      <popover effect=\"scale\" title=\"**Emoji title** :rocket:\">\r\n        <div slot=\"content\">\r\n          This is a long content...\r\n        </div>\r\n\r\n        <button class=\"btn btn-default\">Hover</button>\r\n      </popover>\r\n      <h4>Wrap Text</h4>\r\n      <popover header=\"false\" content=\"Nice!\">What do you say</popover>\r\n      <popover header=\"false\" content=\"Nice!\"><em> Originally italic </em></popover>\r\n      <popover header=\"false\" content=\"Nice!\"><strong> Originally bold </strong></popover>\r\n    </div>\r\n    <doc-code language=\"markup\">\r\n      <popover effect=\"fade\" placement=\"bottom\" title=\"Title\" content=\"content\">\r\n        <button class=\"btn btn-default\">Popover on bottom</button>\r\n      </popover>\r\n\r\n      Markdown\r\n      <popover effect=\"scale\" title=\"**Emoji title** :rocket:\" content=\"++emoji++ content :cat:\">\r\n        <button class=\"btn btn-default\">Hover</button>\r\n      </popover>\r\n\r\n      For larger content, use slot=\"content\"\r\n      <popover effect=\"scale\" title=\"**Emoji title** :rocket:\">\r\n        <div slot=\"content\">\r\n          This is a long content...\r\n        </div>\r\n\r\n        <button class=\"btn btn-default\">Hover</button>\r\n      </popover>\r\n    </doc-code>\r\n    <doc-table>\r\n      <div>\r\n        <p>trigger</p>\r\n        <p><code>String</code>, one of <code>click</code> <code>focus</code> <code>hover</code> <code>contextmenu</code></p>\r\n        <p><code>hover</code></p>\r\n        <p>How the popover is triggered.</p>\r\n      </div>\r\n      <div>\r\n        <p>effect</p>\r\n        <p><code>String</code>, one of <code>scale</code> <code>fade</code></p>\r\n        <p><code>fade</code></p>\r\n        <p></p>\r\n      </div>\r\n      <div>\r\n        <p>title</p>\r\n        <p><code>String</code>, or be markdown inline text</p>\r\n        <p></p>\r\n        <p></p>\r\n      </div>\r\n      <div>\r\n        <p>content</p>\r\n        <p><code>String</code>, or be markdown inline text</p>\r\n        <p></p>\r\n        <p></p>\r\n      </div>\r\n      <div>\r\n        <p>header</p>\r\n        <p><code>Boolean</code></p>\r\n        <p><code>true</code></p>\r\n        <p>Whether to show the header.</p>\r\n      </div>\r\n      <div>\r\n        <p>placement</p>\r\n        <p><code>String</code>, one of <code>top</code>\r\n        <code>left</code>\r\n        <code>right</code>\r\n        <code>bottom</code></p>\r\n        <p>top</p>\r\n        <p>How to position the popover.</p>\r\n      </div>\r\n    </doc-table>\r\n  </doc-section>";
 
 /***/ }),
 /* 384 */

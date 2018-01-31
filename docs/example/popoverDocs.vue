@@ -38,6 +38,8 @@
       </popover>
       <h4>Wrap Text</h4>
       <popover header="false" content="Nice!">What do you say</popover>
+      <popover header="false" content="Nice!"><em> Originally italic </em></popover>
+      <popover header="false" content="Nice!"><strong> Originally bold </strong></popover>
     </div>
     <doc-code language="markup">
       <popover effect="fade" placement="bottom" title="Title" content="content">
