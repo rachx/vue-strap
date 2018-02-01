@@ -29790,7 +29790,7 @@
 	    }
 	  },
 	  attached: function attached() {
-	    this.$els.trigger.style['text-decoration'] = 'underline dotted';
+	    this.$els.trigger.style['-webkit-text-decoration'] = 'underline dotted';
 	  }
 	};
 	// </script>
@@ -34004,7 +34004,7 @@
 	    }
 	  },
 	  attached: function attached() {
-	    this.$els.trigger.style['text-decoration'] = 'underline dotted';
+	    this.$els.trigger.style['-webkit-text-decoration'] = 'underline dotted';
 	  }
 	};
 	// </script>
