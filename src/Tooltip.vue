@@ -1,5 +1,7 @@
 <template>
-  <span v-el:trigger v-on:click="void(0)"><slot></slot></span><!--
+  <span v-el:trigger v-on:click="void(0)"
+  v-bind:style="{'text-decoration-line': 'underline', 'text-decoration-style': 'dotted'}">
+  <slot></slot></span><!--
   --><div v-el:popover v-if="show" style="display:block;"
     :class="['tooltip',placement]"
     :transition="effect"
@@ -38,9 +40,6 @@ export default {
         this.setTrigger(el) // rebind events
       }
     }
-  },
-  attached () {
-    this.$els.trigger.style['-webkit-text-decoration'] = 'underline dotted'
   }
 }
 </script>

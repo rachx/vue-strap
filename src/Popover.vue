@@ -1,5 +1,7 @@
 <template>
-  <span v-el:trigger v-if="hasSlot" v-on:click="void(0)"><slot></slot></span><!--
+  <span v-el:trigger v-if="hasSlot" v-on:click="void(0)"
+  v-bind:style="{'text-decoration-line': 'underline', 'text-decoration-style': 'dotted'}">
+  <slot></slot></span><!--
   --><div v-el:popover v-if="show"
     :class="['popover',placement]"
     :transition="effect"
@@ -33,9 +35,6 @@ export default {
     hasSlot () {
       return this._slotContents !== void 0
     }
-  },
-  attached () {
-    this.$els.trigger.style['-webkit-text-decoration'] = 'underline dotted'
   }
 }
 </script>

@@ -29741,7 +29741,11 @@
 	
 	// <template>
 	
-	//   <span v-el:trigger v-on:click="void(0)"><slot></slot></span><!--
+	//   <span v-el:trigger v-on:click="void(0)"
+	
+	//   v-bind:style="{'text-decoration-line': 'underline', 'text-decoration-style': 'dotted'}">
+	
+	//   <slot></slot></span><!--
 	
 	//   --><div v-el:popover v-if="show" style="display:block;"
 	
@@ -29788,73 +29792,71 @@
 	        this.setTrigger(el); // rebind events
 	      }
 	    }
-	  },
-	  attached: function attached() {
-	    this.$els.trigger.style['-webkit-text-decoration'] = 'underline dotted';
 	  }
+	  // </script>
+	
+	
+	  // <style>
+	
+	  // .tooltip.top,
+	
+	  // .tooltip.left,
+	
+	  // .tooltip.right,
+	
+	  // .tooltip.bottom {
+	
+	  //   opacity: .9
+	
+	  // }
+	
+	  // .fadein-enter {
+	
+	  //   animation:fadein-in 0.3s ease-in;
+	
+	  // }
+	
+	  // .fadein-leave {
+	
+	  //   animation:fadein-out 0.3s ease-out;
+	
+	  // }
+	
+	  // @keyframes fadein-in {
+	
+	  //   0% {
+	
+	  //     opacity: 0;
+	
+	  //   }
+	
+	  //   100% {
+	
+	  //     opacity: .9;
+	
+	  //   }
+	
+	  // }
+	
+	  // @keyframes fadein-out {
+	
+	  //   0% {
+	
+	  //     opacity: .9;
+	
+	  //   }
+	
+	  //   100% {
+	
+	  //     opacity: 0;
+	
+	  //   }
+	
+	  // }
+	
+	  // </style>
+	
 	};
-	// </script>
-	
-	
-	// <style>
-	
-	// .tooltip.top,
-	
-	// .tooltip.left,
-	
-	// .tooltip.right,
-	
-	// .tooltip.bottom {
-	
-	//   opacity: .9
-	
-	// }
-	
-	// .fadein-enter {
-	
-	//   animation:fadein-in 0.3s ease-in;
-	
-	// }
-	
-	// .fadein-leave {
-	
-	//   animation:fadein-out 0.3s ease-out;
-	
-	// }
-	
-	// @keyframes fadein-in {
-	
-	//   0% {
-	
-	//     opacity: 0;
-	
-	//   }
-	
-	//   100% {
-	
-	//     opacity: .9;
-	
-	//   }
-	
-	// }
-	
-	// @keyframes fadein-out {
-	
-	//   0% {
-	
-	//     opacity: .9;
-	
-	//   }
-	
-	//   100% {
-	
-	//     opacity: 0;
-	
-	//   }
-	
-	// }
-	
-	// </style>
 
 /***/ }),
 /* 309 */
@@ -30124,7 +30126,7 @@
 /* 314 */
 /***/ (function(module, exports) {
 
-	module.exports = "<span v-el:trigger v-on:click=\"void(0)\"><slot></slot></span><!--\r\n  --><div v-el:popover v-if=\"show\" style=\"display:block;\"\r\n    :class=\"['tooltip',placement]\"\r\n    :transition=\"effect\"\r\n  >\r\n    <div class=\"tooltip-arrow\"></div>\r\n    <div class=\"tooltip-inner\" v-on:click=\"void(0)\">\r\n      <slot name=\"content\">{{{contentRendered}}}</slot>\r\n   </div>\r\n  </div>";
+	module.exports = "<span v-el:trigger v-on:click=\"void(0)\"\r\n  v-bind:style=\"{'text-decoration-line': 'underline', 'text-decoration-style': 'dotted'}\">\r\n  <slot></slot></span><!--\r\n  --><div v-el:popover v-if=\"show\" style=\"display:block;\"\r\n    :class=\"['tooltip',placement]\"\r\n    :transition=\"effect\"\r\n  >\r\n    <div class=\"tooltip-arrow\"></div>\r\n    <div class=\"tooltip-inner\" v-on:click=\"void(0)\">\r\n      <slot name=\"content\">{{{contentRendered}}}</slot>\r\n   </div>\r\n  </div>";
 
 /***/ }),
 /* 315 */
@@ -34002,103 +34004,104 @@
 	    hasSlot: function hasSlot() {
 	      return this._slotContents !== void 0;
 	    }
-	  },
-	  attached: function attached() {
-	    this.$els.trigger.style['-webkit-text-decoration'] = 'underline dotted';
 	  }
-	};
-	// </script>
+	  // </script>
 	
 	
-	// <style>
+	  // <style>
 	
-	// .popover.top,
+	  // .popover.top,
 	
-	// .popover.left,
+	  // .popover.left,
 	
-	// .popover.right,
+	  // .popover.right,
 	
-	// .popover.bottom {
+	  // .popover.bottom {
 	
-	//   display: block;
+	  //   display: block;
 	
-	//   overflow-wrap: break-word;
+	  //   overflow-wrap: break-word;
 	
-	// }
+	  // }
 	
 	
-	// @media (min-width: 768px) {
+	  // @media (min-width: 768px) {
 	
-	//   .popover.top,
+	  //   .popover.top,
 	
-	//   .popover.left,
+	  //   .popover.left,
 	
-	//   .popover.right,
+	  //   .popover.right,
 	
-	//   .popover.bottom {
+	  //   .popover.bottom {
 	
-	//     max-width: 600px;
+	  //     max-width: 600px;
 	
-	//   }
+	  //   }
 	
-	// }
+	  // }
 	
-	// .scale-enter {
+	  // .scale-enter {
 	
-	//   animation:scale-in 0.15s ease-in;
+	  //   animation:scale-in 0.15s ease-in;
 	
-	// }
+	  // }
 	
-	// .scale-leave {
+	  // .scale-leave {
 	
-	//   animation:scale-out 0.15s ease-out;
+	  //   animation:scale-out 0.15s ease-out;
 	
-	// }
+	  // }
 	
-	// @keyframes scale-in {
+	  // @keyframes scale-in {
 	
-	//   0% {
+	  //   0% {
 	
-	//     transform: scale(0);
+	  //     transform: scale(0);
 	
-	//     opacity: 0;
+	  //     opacity: 0;
 	
-	//   }
+	  //   }
 	
-	//   100% {
+	  //   100% {
 	
-	//     transform: scale(1);
+	  //     transform: scale(1);
 	
-	//     opacity: 1;
+	  //     opacity: 1;
 	
-	//   }
+	  //   }
 	
-	// }
+	  // }
 	
-	// @keyframes scale-out {
+	  // @keyframes scale-out {
 	
-	//   0% {
+	  //   0% {
 	
-	//     transform: scale(1);
+	  //     transform: scale(1);
 	
-	//     opacity: 1;
+	  //     opacity: 1;
 	
-	//   }
+	  //   }
 	
-	//   100% {
+	  //   100% {
 	
-	//     transform: scale(0);
+	  //     transform: scale(0);
 	
-	//     opacity: 0;
+	  //     opacity: 0;
 	
-	//   }
+	  //   }
 	
-	// }
+	  // }
 	
-	// </style>
-	// <template>
+	  // </style>
 	
-	//   <span v-el:trigger v-if="hasSlot" v-on:click="void(0)"><slot></slot></span><!--
+	}; // <template>
+	
+	//   <span v-el:trigger v-if="hasSlot" v-on:click="void(0)"
+	
+	//   v-bind:style="{'text-decoration-line': 'underline', 'text-decoration-style': 'dotted'}">
+	
+	//   <slot></slot></span><!--
 	
 	//   --><div v-el:popover v-if="show"
 	
@@ -34125,7 +34128,7 @@
 /* 377 */
 /***/ (function(module, exports) {
 
-	module.exports = "<span v-el:trigger v-if=\"hasSlot\" v-on:click=\"void(0)\"><slot></slot></span><!--\r\n  --><div v-el:popover v-if=\"show\"\r\n    :class=\"['popover',placement]\"\r\n    :transition=\"effect\"\r\n  >\r\n    <div class=\"arrow\" v-el:arrow></div>\r\n    <h3 class=\"popover-title\" v-if=\"title\" v-on:click=\"void(0)\"><slot name=\"title\">{{{titleRendered}}}</slot></h3>\r\n    <div class=\"popover-content\" v-on:click=\"void(0)\"><slot name=\"content\">{{{contentRendered}}}</slot></div>\r\n  </div>";
+	module.exports = "<span v-el:trigger v-if=\"hasSlot\" v-on:click=\"void(0)\"\r\n  v-bind:style=\"{'text-decoration-line': 'underline', 'text-decoration-style': 'dotted'}\">\r\n  <slot></slot></span><!--\r\n  --><div v-el:popover v-if=\"show\"\r\n    :class=\"['popover',placement]\"\r\n    :transition=\"effect\"\r\n  >\r\n    <div class=\"arrow\" v-el:arrow></div>\r\n    <h3 class=\"popover-title\" v-if=\"title\" v-on:click=\"void(0)\"><slot name=\"title\">{{{titleRendered}}}</slot></h3>\r\n    <div class=\"popover-content\" v-on:click=\"void(0)\"><slot name=\"content\">{{{contentRendered}}}</slot></div>\r\n  </div>";
 
 /***/ }),
 /* 378 */
