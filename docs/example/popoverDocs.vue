@@ -1,12 +1,12 @@
 <template>
   <doc-section id="popover" name="Popover">
     <div class="bs-example">
-      <popover v-for="place in placements" effect="fade" :content="text" :placement="place">
+      <popover v-for="place in placements" effect="fade" :content="text" trigger="click" :placement="place">
         <button class="btn btn-default">Popover on {{place}}</button>
       </popover>
       <hr>
       <h4>Title</h4>
-      <popover v-for="place in placements" effect="fade" header title="Title" :content="text" :placement="place">
+      <popover v-for="place in placements" effect="fade" header title="Title" trigger="click" :content="text" :placement="place">
         <button class="btn btn-default">Popover on {{place}}</button>
       </popover>
       <hr>
